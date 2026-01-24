@@ -6,7 +6,18 @@ This project focuses on analyzing transactional data from an online retail compa
 The objective of the project is to demonstrate an end-to-end analytics workflow:  
 from raw transactional data → data cleaning → KPI calculation → business insights → interactive dashboards.
 
-The project is designed as a portfolio case to showcase practical data analytics skills relevant for Data Analyst / Business Analyst roles.
+
+## Data Source
+
+The clean dataset is not included in the repository due to file size limitations.
+the clean and raw datasets are available here:
+https://drive.google.com/drive/folders/1-OxCxu3kUkfWN-SOgmVQpraj2LWJzxjQ?usp=drive_link
+
+Place the file into `data/raw/` before running the notebook.
+
+Source:
+- Online Retail Dataset (UCI Machine Learning Repository)
+  https://archive.ics.uci.edu/ml/datasets/online+retail
 
 
 ## Dataset
