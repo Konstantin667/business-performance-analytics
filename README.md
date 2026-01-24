@@ -1,2 +1,75 @@
-# business-performance-analytics-
-End-to-end business analytics project using Python and Power BI
+# Business Performance Analytics
+
+## Project Overview
+This project focuses on analyzing transactional data from an online retail company to assess business performance, customer concentration, and revenue dynamics over time.
+
+The objective of the project is to demonstrate an end-to-end analytics workflow:  
+from raw transactional data → data cleaning → KPI calculation → business insights → interactive dashboards.
+
+The project is designed as a portfolio case to showcase practical data analytics skills relevant for Data Analyst / Business Analyst roles.
+
+
+## Dataset
+- **Source:** Online Retail transactional dataset  
+- **Time period:** December 2010 – December 2011  
+- **Size:** ~540,000 transaction rows  
+- **Granularity:** Line-item transactional data  
+
+Due to file size limitations, raw and processed datasets are not stored in this repository.  
+All analysis steps are fully reproducible using the provided notebook.
+
+
+## Tools & Technologies
+- **Python:** pandas, matplotlib  
+- **SQL:** SQLite (KPI validation and aggregations)  
+- **Power BI:** interactive dashboards, DAX measures, slicers  
+- **GitHub:** project structuring and version control  
+
+
+## Analysis Scope
+The analysis covers:
+- Data quality checks (cancellations, zero or negative values, missing customer IDs)
+- Transaction- and order-level aggregation
+- Revenue-based KPIs and business metrics
+- Customer concentration and Pareto (80/20) analysis
+- Time-based revenue trends (monthly and yearly)
+- Cross-validation of results using SQL queries
+
+
+## Key Metrics
+- **Total Revenue**
+- **Total Orders**
+- **Total Customers**
+- **Average Order Value (AOV)**
+- **Revenue per Customer**
+- **Orders per Customer**
+
+
+## Key Insights
+- Revenue is highly concentrated: a small group of customers accounts for a large share of total revenue.
+- Clear seasonality is observed, with revenue peaking toward the end of the year.
+- A significant number of transactions lack customer identifiers, limiting customer-level analysis but not affecting aggregate KPIs.
+- Business performance is driven primarily by repeat high-value customers rather than a uniformly distributed customer base.
+
+
+## Power BI Dashboard
+An interactive Power BI dashboard was developed to visualize key business insights, including:
+- Total revenue by country
+- Revenue trends over time
+- Top customers by revenue
+- Cumulative revenue share (Pareto curve)
+- KPI summary cards with interactive filters (country, year, quarter)
+
+
+ ## The notebook includes:
+- Data cleaning logic
+- Feature engineering
+- KPI computation
+- Exploratory analysis
+- SQL-based validation of metrics
+
+
+## Author
+**Konstantin Rudnev**  
+Aspiring Data Analyst / Business Analyst  
+Open to opportunities across Europe
