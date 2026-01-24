@@ -71,6 +71,17 @@ An interactive Power BI dashboard was developed to visualize key business insigh
 - Cumulative revenue share (Pareto curve)
 - KPI summary cards with interactive filters (country, year, quarter)
 
+The interactive Power BI dashboard is available in this repository:
+
+`/powerbi/business_dashboard.pbix`
+
+Due to GitHub limitations, the file cannot be previewed online.
+To view the dashboard, please download the `.pbix` file and open it in Power BI Desktop.
+
+### Dashboard Preview
+
+![Dashboard Preview](powerbi/dashboard_preview.png)
+
 
  ## The notebook includes:
 - Data cleaning logic
