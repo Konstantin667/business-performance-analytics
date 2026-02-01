@@ -96,4 +96,4 @@ To view the dashboard, please download the `.pbix` file and open it in Power BI 
 Aspiring Data Analyst / Business Analyst  
 Open to opportunities across Europe
 
-🔗 GitHub: https://github.com/Konstantin667
+GitHub: https://github.com/Konstantin667
