@@ -57,22 +57,15 @@ The analysis covers:
 
 
 ## Key Insights
-- **Strong revenue concentration**  
-  A small proportion of customers generates a dominant share of total revenue, confirming a pronounced Pareto (80/20) pattern in customer value distribution.
+- Revenue is highly concentrated across the customer base: a small fraction of customers generates the majority of total revenue, exposing the business to customer concentration risk.
 
-- **Highly skewed transaction values**  
-  Most orders are low-value, while a limited number of high-revenue transactions significantly influence total sales.  
-  This makes mean-based KPIs sensitive to outliers and emphasizes the importance of distribution-aware analysis.
+- Order value distribution is strongly right-skewed, indicating that revenue growth is driven more by high-value transactions than by volume alone.
 
-- **Clear seasonal revenue dynamics**  
-  Revenue exhibits a strong upward trend toward the end of the year, indicating seasonality likely driven by holidays and peak retail demand periods.
+- Monthly revenue dynamics reveal clear seasonality with pronounced peaks toward the end of the year, suggesting demand is influenced by calendar-driven factors such as holidays and promotional periods.
 
-- **Repeat customers as primary revenue drivers**  
-  Business performance depends more on a small base of repeat, high-value customers than on broad, uniform purchasing behavior across the customer base.
+- A significant share of customers contributes marginally to total revenue, highlighting opportunities for targeted retention strategies and differentiated customer segmentation.
 
-- **Data limitations with minimal KPI impact**  
-  Missing customer identifiers reduce granularity of customer-level analysis but do not materially distort aggregate revenue KPIs or overall business conclusions.
-
+- Revenue volatility over time emphasizes the importance of trend-aware and season-aware planning rather than relying on static averages.
 
 ## Power BI Dashboard
 An interactive Power BI dashboard was developed to visualize key business insights, including:
@@ -124,23 +117,16 @@ This pattern aligns with typical retail demand cycles and supports season-aware 
 
 ## Business Interpretation
 
-- **Revenue concentration risk**  
-  The cumulative revenue curve shows a strong Pareto effect: a relatively small share of customers generates the majority of total revenue.  
-  This indicates dependency on high-value customers and increases business risk if these customers churn.
 
-- **Customer value inequality**  
-  The distribution of order revenue is highly right-skewed, with many low-value orders and a small number of extremely large purchases.  
-  This suggests that average-based KPIs (e.g. AOV) should be interpreted carefully, as they are driven by outliers rather than typical customer behavior.
+- The strong revenue concentration suggests that losing a small group of high-value customers could result in a disproportionate revenue decline. This highlights the need for focused retention, loyalty programs, and proactive account management for top customers.
 
-- **Seasonality-driven performance**  
-  Monthly revenue dynamics reveal clear seasonal peaks toward the end of the year.  
-  This pattern supports the need for seasonal inventory planning, marketing campaigns, and cash-flow forecasting aligned with demand spikes.
+- The heavy right-skew in order value indicates that upselling and cross-selling strategies may have a higher impact on revenue growth than efforts aimed solely at increasing transaction volume.
 
-- **Strategic focus on retention**  
-  Since revenue is driven primarily by repeat high-value customers, business growth strategies should prioritize retention, loyalty programs, and personalized offers rather than only acquisition.
+- Clear seasonal revenue patterns imply that inventory planning, marketing budgets, and operational capacity should be adjusted ahead of peak demand periods to avoid missed revenue opportunities or supply constraints.
 
-- **Operational implications**  
-  The uneven revenue structure implies that operational disruptions affecting top customers (logistics delays, stockouts) could have a disproportionate impact on total business performance.
+- Customers with low individual contribution but high frequency represent a potential growth segment if nudged toward higher-value purchases through personalized offers or bundles.
+
+- Observed revenue volatility reinforces the importance of forward-looking forecasting and scenario planning rather than backward-looking KPI monitoring alone.
 
 
 ## Author
