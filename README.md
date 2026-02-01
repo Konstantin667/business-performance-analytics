@@ -57,10 +57,21 @@ The analysis covers:
 
 
 ## Key Insights
-- Revenue is highly concentrated: a small group of customers accounts for a large share of total revenue.
-- Clear seasonality is observed, with revenue peaking toward the end of the year.
-- A significant number of transactions lack customer identifiers, limiting customer-level analysis but not affecting aggregate KPIs.
-- Business performance is driven primarily by repeat high-value customers rather than a uniformly distributed customer base.
+- **Strong revenue concentration**  
+  A small proportion of customers generates a dominant share of total revenue, confirming a pronounced Pareto (80/20) pattern in customer value distribution.
+
+- **Highly skewed transaction values**  
+  Most orders are low-value, while a limited number of high-revenue transactions significantly influence total sales.  
+  This makes mean-based KPIs sensitive to outliers and emphasizes the importance of distribution-aware analysis.
+
+- **Clear seasonal revenue dynamics**  
+  Revenue exhibits a strong upward trend toward the end of the year, indicating seasonality likely driven by holidays and peak retail demand periods.
+
+- **Repeat customers as primary revenue drivers**  
+  Business performance depends more on a small base of repeat, high-value customers than on broad, uniform purchasing behavior across the customer base.
+
+- **Data limitations with minimal KPI impact**  
+  Missing customer identifiers reduce granularity of customer-level analysis but do not materially distort aggregate revenue KPIs or overall business conclusions.
 
 
 ## Power BI Dashboard
