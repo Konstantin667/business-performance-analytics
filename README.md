@@ -1,140 +1,105 @@
 # Business Performance Analytics
 
-## Project Overview
-This project focuses on analyzing transactional data from an online retail company to assess business performance, customer concentration, and revenue dynamics over time.
+Analysis of an online retailer's transactions to assess revenue, customer concentration and revenue dynamics:
+raw transactional data → data quality checks → cleaning → KPIs → business insights → SQL validation → Power BI dashboard.
 
-The objective of the project is to demonstrate an end-to-end analytics workflow:  
-from raw transactional data → data cleaning → KPI calculation → business insights → interactive dashboards.
+## Data
 
+- **Source:** [Online Retail dataset, UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/online+retail)
+- **Period:** 1 December 2010 – 9 December 2011 (December 2011 is a partial month)
+- **Size:** 541,909 line items, UK-based retailer with mostly wholesale customers
+- Raw and processed files are not stored in the repo. Download `online_retail.xlsx` from UCI or from
+  [Google Drive](https://drive.google.com/drive/folders/1-OxCxu3kUkfWN-SOgmVQpraj2LWJzxjQ?usp=drive_link)
+  and place it in `data/raw/`.
 
-## Data Source
+## Tools
 
-The clean dataset is not included in the repository due to file size limitations.
-the clean and raw datasets are available here:
-https://drive.google.com/drive/folders/1-OxCxu3kUkfWN-SOgmVQpraj2LWJzxjQ?usp=drive_link
+- **Python:** pandas, numpy, matplotlib
+- **SQL:** SQLite — every KPI is recomputed in SQL and asserted equal to the pandas result
+- **Power BI:** interactive dashboard, DAX measures, slicers
 
-Place the file into `data/raw/` before running the notebook.
+## Data cleaning
 
-Source:
-- Online Retail Dataset (UCI Machine Learning Repository)
-  https://archive.ics.uci.edu/ml/datasets/online+retail
+| Issue found | Rows | Treatment |
+|---|---:|---|
+| Exact duplicate rows | 5,268 | removed |
+| Service codes (postage, manual adjustments, Amazon fees, bad debt, samples…) | ~2,900 | excluded — not product revenue |
+| Zero or negative unit price | 2,517 | excluded |
+| Cancellations (`InvoiceNo` starting with `C`) | 9,288 | **kept as negative revenue** → net revenue |
+| Missing `CustomerID` | 135,080 | kept for totals, excluded from customer-level analysis |
 
+Why cancellations are netted instead of dropped: removing only the cancellation lines keeps the original orders
+that were later cancelled. In this dataset, two "top-10 customers" (16446 and 12346) each placed one huge order
+(80,995 and 74,215 units) and cancelled it within minutes. Counting gross sales would put them among the largest clients.
 
-## Dataset
-- **Source:** Online Retail transactional dataset  
-- **Time period:** December 2010 – December 2011  
-- **Size:** ~540,000 transaction rows  
-- **Granularity:** Line-item transactional data  
+## Key metrics
 
-Due to file size limitations, raw and processed datasets are not stored in this repository.  
-All analysis steps are fully reproducible using the provided notebook.
+| KPI | Value |
+|---|---:|
+| Gross sales | £10.25M |
+| Cancelled value | £0.48M (4.6%) |
+| **Net revenue** | **£9.77M** |
+| Orders (invoices) | 19,773 |
+| Customers with a known ID | 4,334 |
+| Average / median order value | £518 / £302 |
+| Top-10 customers' share of net revenue | 16.6% |
+| Customers generating 80% of net revenue | 27% |
 
+## Key insights
 
-## Tools & Technologies
-- **Python:** pandas, matplotlib  
-- **SQL:** SQLite (KPI validation and aggregations)  
-- **Power BI:** interactive dashboards, DAX measures, slicers  
-- **GitHub:** project structuring and version control  
+- **Customer concentration:** 27% of customers generate 80% of net revenue, and the top 10 bring 16.6%.
+  Losing a few key accounts would hit revenue hard → focused retention and account management for the top tier.
+- **Right-skewed order values:** the mean order (£518) is far above the median (£302) because of large wholesale
+  orders. Growth levers are order size (upsell, bundles, volume pricing) as much as order count.
+- **Strong year-end growth:** September–November 2011 average +84% vs January–August, peaking in November (£1.43M).
+  December 2011 looks like a drop only because the data stops on 9 December; revenue per trading day is in line with November.
+  With 12 full months this is one year-end peak — confirming seasonality would need more than one year of data.
+- **Data quality changes the answer:** duplicates, service codes and cancelled mega-orders change the top-customer
+  list and the concentration metrics. Cleaning rules are documented and validated in SQL.
 
+## Charts
 
-## Analysis Scope
-The analysis covers:
-- Data quality checks (cancellations, zero or negative values, missing customer IDs)
-- Transaction- and order-level aggregation
-- Revenue-based KPIs and business metrics
-- Customer concentration and Pareto (80/20) analysis
-- Time-based revenue trends (monthly and yearly)
-- Cross-validation of results using SQL queries
+### Monthly net revenue
+![Monthly Net Revenue](assets/monthly_revenue_over_time.png)
 
+### Customer revenue concentration (Pareto)
+![Cumulative Net Revenue Share by Customers](assets/cumulative_revenue_share_per_customer.png)
 
-## Key Metrics
-- **Total Revenue**
-- **Total Orders**
-- **Total Customers**
-- **Average Order Value (AOV)**
-- **Revenue per Customer**
-- **Orders per Customer**
+### Order value distribution
+![Distribution of Order Value](assets/distribution_of_order_revenue.png)
 
+## Power BI dashboard
 
-## Key Insights
-- Revenue is highly concentrated across the customer base: a small fraction of customers generates the majority of total revenue, exposing the business to customer concentration risk.
-
-- Order value distribution is strongly right-skewed, indicating that revenue growth is driven more by high-value transactions than by volume alone.
-
-- Monthly revenue dynamics reveal clear seasonality with pronounced peaks toward the end of the year, suggesting demand is influenced by calendar-driven factors such as holidays and promotional periods.
-
-- A significant share of customers contributes marginally to total revenue, highlighting opportunities for targeted retention strategies and differentiated customer segmentation.
-
-- Revenue volatility over time emphasizes the importance of trend-aware and season-aware planning rather than relying on static averages.
-
-## Power BI Dashboard
-An interactive Power BI dashboard was developed to visualize key business insights, including:
-- Total revenue by country
-- Revenue trends over time
-- Top customers by revenue
-- Cumulative revenue share (Pareto curve)
-- KPI summary cards with interactive filters (country, year, quarter)
-
-The interactive Power BI dashboard is available in this repository:
-
-`/powerbi/business_dashboard.pbix`
-
-Due to GitHub limitations, the file cannot be previewed online.
-To view the dashboard, please download the `.pbix` file and open it in Power BI Desktop.
-
-### Dashboard Preview
+`powerbi/business_dashboard.pbix` — revenue by country, revenue over time, top customers, Pareto curve and KPI cards
+with country / year / quarter filters. Download the file and open it in Power BI Desktop (GitHub cannot preview `.pbix`).
 
 ![Dashboard Preview](powerbi/dashboard_preview.png)
 
-### Customer Revenue Concentration (Pareto Analysis)
+> The dashboard was built on an earlier version of the cleaned data (gross sales). To match the notebook,
+> refresh it from `data/processed/transactions_clean.csv` produced by the current notebook.
 
-![Cumulative Revenue Share by Customers](assets/cumulative_revenue_share_per_customer.png)
+## Repository structure
 
-This chart illustrates cumulative revenue contribution by customers sorted by revenue.  
-Approximately 80% of total revenue is generated by a relatively small subset of customers, highlighting strong revenue concentration.
+```
+notebooks/01_business_analysis.ipynb   cleaning, KPIs, concentration, time trends, SQL validation
+assets/                                charts used in this README
+powerbi/                               dashboard (.pbix) and preview
+data/raw, data/processed               local data folders (not tracked)
+```
 
-### Distribution of Order Revenue
+## How to run
 
-![Distribution of Order Revenue](assets/distribution_of_order_revenue.png)
-
-The revenue distribution is heavily right-skewed, indicating that most orders are low-value while a small number of transactions contribute disproportionately to total revenue.
-
-### Monthly Revenue Over Time
-
-![Monthly Revenue Over Time](assets/monthly_revenue_over_time.png)
-
-Monthly revenue trends reveal clear seasonality, with noticeable growth toward the end of the year.  
-This pattern aligns with typical retail demand cycles and supports season-aware business planning.
-
-
-
- ## The notebook includes:
-- Data cleaning logic
-- Feature engineering
-- KPI computation
-- Exploratory analysis
-- SQL-based validation of metrics
-
-## Business Interpretation
-
-
-- The strong revenue concentration suggests that losing a small group of high-value customers could result in a disproportionate revenue decline. This highlights the need for focused retention, loyalty programs, and proactive account management for top customers.
-
-- The heavy right-skew in order value indicates that upselling and cross-selling strategies may have a higher impact on revenue growth than efforts aimed solely at increasing transaction volume.
-
-- Clear seasonal revenue patterns imply that inventory planning, marketing budgets, and operational capacity should be adjusted ahead of peak demand periods to avoid missed revenue opportunities or supply constraints.
-
-- Customers with low individual contribution but high frequency represent a potential growth segment if nudged toward higher-value purchases through personalized offers or bundles.
-
-- Observed revenue volatility reinforces the importance of forward-looking forecasting and scenario planning rather than backward-looking KPI monitoring alone.
-
+```bash
+pip install -r requirements.txt
+# put online_retail.xlsx into data/raw/
+jupyter notebook notebooks/01_business_analysis.ipynb
+```
 
 ## Author
-**Konstantin Rudnev**  
-Aspiring Data Analyst / Business Analyst  
-Open to opportunities across Europe
 
-GitHub: https://github.com/Konstantin667
+**Konstantin Rudnev** — Business & Product Analyst
+[LinkedIn](https://www.linkedin.com/in/konstantin-rudnev-a96727354) · [GitHub](https://github.com/Konstantin667)
 
 ## License
-This project is licensed under the MIT License.
+
+MIT
